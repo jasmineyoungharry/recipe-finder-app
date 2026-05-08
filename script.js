@@ -36,6 +36,26 @@ async function searchRecipes() {
     }
 }
 
+function getIngredients(meal) {
+
+    const ingredients = [];
+
+    for (let i = 1; i <= 20; i++) {
+
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+
+        if (ingredient && ingredient.trim() !== "") {
+
+            ingredients.push(`${measure} ${ingredient}`);
+
+        }
+    }
+
+    return ingredients;
+}
+
+
 function displayRecipes(meals) {
 
     recipeContainer.innerHTML = "";
@@ -71,8 +91,19 @@ function displayRecipes(meals) {
                     </p>
 
                     <p class="instructions">
-                        ${meal.strInstructions.slice(0, 150)}...
+                        ${meal.strInstructions.slice(0, 120)}...
                     </p>
+
+                    <h3>Ingredients:</h3>
+
+                    <ul class="ingredients-list">
+                        ${getIngredients(meal)
+                        .slice(0, 5)
+                        .map((ingredient) =>
+                    `<li>${ingredient}</li>`
+                    )
+                    .join("")}
+                </ul>
 
                 </div>
 
