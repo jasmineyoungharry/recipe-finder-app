@@ -17,6 +17,12 @@ async function searchRecipes() {
     const apiUrl =
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
 
+    recipeContainer.innerHTML = `
+        <div class="loading-message">
+            <h2>Loading recipes...</h2>
+        </div>
+    `;
+    
     try {
 
         const response = await fetch(apiUrl);
@@ -166,6 +172,16 @@ function displayRecipes(meals) {
 }
 
 searchButton.addEventListener("click", searchRecipes);
+
+searchInput.addEventListener("keydown", (event) => {
+
+    if (event.key === "Enter") {
+
+        searchRecipes();
+
+    }
+
+});
 
 closeBtn.addEventListener("click", () => {
     recipeModal.style.display = "none";
