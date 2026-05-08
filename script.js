@@ -1,6 +1,9 @@
 const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
 const recipeContainer = document.getElementById("recipe-container");
+const recipeModal = document.getElementById("recipe-modal");
+const modalBody = document.getElementById("modal-body");
+const closeBtn = document.getElementById("close-btn");
 
 async function searchRecipes() {
 
@@ -55,6 +58,46 @@ function getIngredients(meal) {
     return ingredients;
 }
 
+function openRecipeModal(meal) {
+
+    modalBody.innerHTML = `
+        <img 
+            src="${meal.strMealThumb}" 
+            alt="${meal.strMeal}"
+            class="modal-image"
+        />
+
+        <h2 class="modal-title">
+            ${meal.strMeal}
+        </h2>
+
+        <p class="modal-category">
+            ${meal.strCategory}
+        </p>
+
+        <h3>Ingredients</h3>
+
+        <ul class="ingredients-list">
+            ${getIngredients(meal)
+                .map((ingredient) =>
+                    `<li>${ingredient}</li>`
+                )
+                .join("")}
+        </ul>
+
+        <div class="modal-instructions">
+
+            <h3>Instructions</h3>
+
+            <p>
+                ${meal.strInstructions}
+            </p>
+
+        </div>
+    `;
+
+    recipeModal.style.display = "flex";
+}
 
 function displayRecipes(meals) {
 
@@ -105,6 +148,13 @@ function displayRecipes(meals) {
                     .join("")}
                 </ul>
 
+                <button 
+                    class="view-recipe-btn"
+                    onclick="openRecipeModal(${JSON.stringify(meal).replace(/"/g, '&quot;')})"
+                >
+                    View Recipe
+                </button>
+
                 </div>
 
             </div>
@@ -116,3 +166,7 @@ function displayRecipes(meals) {
 }
 
 searchButton.addEventListener("click", searchRecipes);
+
+closeBtn.addEventListener("click", () => {
+    recipeModal.style.display = "none";
+});
