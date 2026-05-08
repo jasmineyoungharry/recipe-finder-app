@@ -24,6 +24,13 @@ async function searchRecipes() {
 
     } catch (error) {
 
+        recipeContainer.innerHTML = `
+            <div class="error-message">
+                <h2>Something went wrong</h2>
+                <p>Please try again later.</p>
+            </div>
+        `;
+
         console.log("Error fetching recipes:", error);
 
     }
@@ -32,6 +39,18 @@ async function searchRecipes() {
 function displayRecipes(meals) {
 
     recipeContainer.innerHTML = "";
+
+    if (!meals) {
+
+        recipeContainer.innerHTML = `
+            <div class="error-message">
+                <h2>No recipes found</h2>
+                <p>Please try searching for another meal.</p>
+            </div>
+        `;
+
+        return;
+    }
 
     meals.forEach((meal) => {
 

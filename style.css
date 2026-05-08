@@ -122,3 +122,23 @@ body {
     color: #555;
     line-height: 1.5;
 }
+
+
+/* Error Message */
+
+.error-message {
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-message h2 {
+    color: #ff6b35;
+    margin-bottom: 10px;
+}
+
+.error-message p {
+    color: #666;
+}
