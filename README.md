@@ -24,13 +24,13 @@ This project allows users to search for recipes, explore ingredients, and view d
 ## Screenshots
 
 ### Desktop View
-![Desktop View](screenshots/desktop-view.png)
+![Desktop View](screenshots/desktop.png)
 
 ### Recipe Modal
-![Recipe Modal](screenshots/recipe-modal.png)
+![Recipe Modal](screenshots/modal.png)
 
 ### Mobile View
-![Mobile View](screenshots/mobile_view.png)
+![Mobile View](screenshots/mobile.png)
 
 ---
 
