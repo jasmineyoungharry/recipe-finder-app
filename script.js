@@ -1,5 +1,6 @@
 const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
+const recipeContainer = document.getElementById("recipe-container");
 
 async function searchRecipes() {
 
@@ -19,13 +20,49 @@ async function searchRecipes() {
 
         const data = await response.json();
 
-        console.log(data);
+        displayRecipes(data.meals);
 
     } catch (error) {
 
         console.log("Error fetching recipes:", error);
 
     }
+}
+
+function displayRecipes(meals) {
+
+    recipeContainer.innerHTML = "";
+
+    meals.forEach((meal) => {
+
+        const recipeCard = `
+            <div class="recipe-card">
+
+                <img 
+                    src="${meal.strMealThumb}" 
+                    alt="${meal.strMeal}"
+                />
+
+                <div class="recipe-content">
+
+                    <h2>${meal.strMeal}</h2>
+
+                    <p class="category">
+                        ${meal.strCategory}
+                    </p>
+
+                    <p class="instructions">
+                        ${meal.strInstructions.slice(0, 150)}...
+                    </p>
+
+                </div>
+
+            </div>
+        `;
+
+        recipeContainer.innerHTML += recipeCard;
+
+    });
 }
 
 searchButton.addEventListener("click", searchRecipes);
